@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"> 
+	<head>
+		<title>Shop</title> 
+		<link rel="stylesheet" th:href="@{/css/main.css}" />
+        <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,300,600,700,800' rel='stylesheet' type='text/css'>
+	</head>
+	<body class="bg-blue-800 font-['Raleway'] font-light text-white">
+        <div class="min-h-screen fixed top-0 left-0 bottom-0 bg-white w-[350px]" th:fragment="menuClient">
+            <div class="flex flex-wrap items-center p-5 mt-3">
+                <a class="flex items-center mr-3" th:href="@{/client}">
+                    <img th:src="@{/images/profile.png}" class="w-[20px]">
+                    <div class="ml-1 text-black text-sm">Personal account</div>
+                </a>
+                <form method="post" th:action="@{/logout}">
+                    <button type="submit" class="flex items-center" th:href="@{/admin}">
+                        <img th:src="@{/images/logout.png}" class="w-[20px]">
+                        <div class="ml-1 text-black text-sm">Logout</div>
+                    </button>
+                </form>
+                <a class="flex ml-3 max-w-fit items-center" th:href="@{/client/basket}">
+                    <img th:src="@{/images/shopping-cart.png}" class="w-[20px]" alt="">
+                    <div class="ml-1 text-black text-sm">Basket</div>
+                </a>
+            </div>
+            <a class="block px-5 py-2 mt-10 text-black text-2xl uppercase duration-300 ease-in-out hover:translate-x-8 hover:scale-125" th:href="@{/client/smartphones}">Smartphones</a>
+            <a class="block px-5 py-2 text-black text-2xl uppercase duration-300 ease-in-out hover:translate-x-8 hover:scale-125" th:href="@{/client/orders}">My orders</a>
+            <a class="block px-5 py-2 text-black text-2xl uppercase duration-300 ease-in-out hover:translate-x-8 hover:scale-125" th:href="@{/client/contacts}">Contacts</a>
+        </div>
+        <div class="pl-[350px]">
+            <div class="container p-10 m-auto">
+                <div class="w-full max-w-lg m-auto justify-center">
+                    <form class="bg-opacity-50 px-10" method="POST" th:action="@{/client}" th:object="${user}" name="signUpForm" id="signUpForm"> 
+                        <div class="text-center text-3xl uppercase tracking-widest">My account</div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{name}" name="name" id="name" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="[A-Za-zА-Яа-яёЁ]+" required />
+                            <label for="name" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Name</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{surname}" name="surname" id="surname" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="[A-Za-zА-Яа-яёЁ]+" required />
+                            <label for="surname" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Surname</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{lastname}" name="lastname" id="lastname" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="[A-Za-zА-Яа-яёЁ]+" required />
+                            <label for="lastname" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Lastname</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{phone}" name="phone" id="phone" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="(80|\+375)(29|44|25|33)[\d]{7}" required />
+                            <label for="phone" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Phone</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="email" th:field="*{email}" name="email" id="email" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " required />
+                            <label for="email" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Email</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{username}" name="username" id="username" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " minlength="5" required />
+                            <label for="username" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Username</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="password" th:field="*{password}" name="password" id="password" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " minlength="5" required />
+                            <label for="password" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Password</label>
+                        </div>
+                        <div th:if="${errMes}" class="text-red-500 font-medium mt-1" th:text="${errMes}"></div>
+                        <div class="mt-5">
+                            <button type="submit" id="btn" class="w-full bg-white text-xl text-blue-700 border border-white uppercase hover:bg-transparent hover:text-white p-3 focus:outline-none focus:shadow-outline">
+                                Save
+                            </button>
+                        </div>
+                        <a th:href="@{/client/deleteAccount}" class="block mt-5 text-center w-full bg-white text-xl text-blue-700 border border-white uppercase hover:bg-transparent hover:text-white p-3 focus:outline-none focus:shadow-outline">
+                            Delete account
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+	</body> 
+</html>

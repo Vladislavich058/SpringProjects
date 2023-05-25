@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>La Sofia</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="user-account-container">
+		<div th:replace="~{adminAccount :: account-bar}"></div>
+		<div class="order-container">
+			<div class="flex-container">
+				<div class="top-container">
+					<div class="analytic-name">Top dishes</div>
+					<ol class="top-list">
+						<li th:each="dish : ${dishes}">
+							<div class="dish-name" th:text="${dish}"></div>
+						</li>
+					</ol>
+				</div>
+				<div class="top-container">
+					<div class="analytic-name">Top drinks</div>
+					<ol class="top-list">
+						<li th:each="drink : ${drinks}">
+							<div class="dish-name" th:text="${drink}"></div>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<div class="percent-container">
+				<div class="analytic-tiem-container">
+					<div class="percent-name">Percentage of cancelled orders: </div>
+					<div class="percent-number" th:text="${@thymeMath.ceil(canceledPercent)}+'%'"></div>
+				</div>
+				<div class="analytic-tiem-container">
+					<div class="percent-name">Percentage of expired orders: </div>
+					<div class="percent-number" th:text="${@thymeMath.ceil(expiredPercent)}+'%'"></div>
+				</div>
+				<div class="analytic-tiem-container">
+					<div class="percent-name">Percentage of in time completed orders: </div>
+					<div class="percent-number" th:text="${@thymeMath.ceil(inTimePercent)}+'%'"></div>
+				</div>
+				<div class="analytic-tiem-container">
+					<div class="percent-name">Avarage paycheck: </div>
+					<div class="percent-number" th:text="${@thymeMath.ceil(payCheck)}+' BYN'"></div>
+				</div>
+			</div>
+			<div style="margin-top: 50px;">
+				<a th:href="@{/admin/printAnalytics}" class="button">Print</a>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

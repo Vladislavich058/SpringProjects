@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  	<head>
+		<title>La Sofia</title> 
+		<link rel="stylesheet" th:href="@{/css/style.css}" /> 
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header" th:fragment="header">
+				<div class="first-line">
+					<div class="phone-container">
+						<img th:src="@{/images/phone-call.png}"/>
+						<span>+375 29 123-33-44</span>
+					</div>
+					<div class="mail-container">
+						<img th:src="@{/images/close-envelope.png}"/>
+						<span>laSofia@mail.ru</span>
+					</div>					
+					<div class="name-container">
+						<a href="">La Sofia</a>
+					</div>
+					<div th:if="!${user}" class="user-container" >
+						<a th:href="@{/login}">
+							<img th:src="@{/images/user-profile.png}"/>
+							<span>Enter</span>
+						</a>
+					</div>
+					<div th:if="${user}" class="user-container">
+						<a th:href="${user.getAuthorities().toString().equals('[ROLE_CLIENT]')} ? @{/client/account} : 
+										(${user.getAuthorities().toString().equals('[ROLE_ADMIN]')} ? @{/admin/account} :
+										(${user.getAuthorities().toString().equals('[ROLE_MANAGER]')} ? @{/manager/account} :
+										(${user.getAuthorities().toString().equals('[ROLE_MESSENGER]')} ? @{/messenger/account})))">
+							<img th:src="@{/images/user-profile.png}"/>
+							<span th:text="${user.getUsername()}"></span>
+						</a>
+					</div>
+				</div>
+				<div class="second-line">
+					<a th:href="@{/}">Main</a>
+					<a th:href="@{/menu}">Menu</a>
+					<a th:href="@{/delivery}">Delivery</a>
+					<a th:href="@{/contacts}">Contacts</a>
+					<a class="orderBtn" th:if="!${user} or ${user.getAuthorities().toString().equals('[ROLE_CLIENT]')}" 
+						th:href="@{/order}">Make an order <img th:src="@{/images/right-arrow-angle.png}"/></a>
+				</div>
+			</div>
+			<div class="center">
+				<div class="name">La Sofia</div>
+				<div class="description">Only fresh dishes from our chefs in a cozy and warm atmosphere of the main restaurant of the country!</div>
+				<div class="button-container">
+					<a th:href="@{/menu}">Menu</a>
+					<a th:href="@{/login}">Enter</a>
+				</div>			
+			</div>
+		</div>
+	</body>
+	<footer>
+	 	<div class="foottext" th:fragment="footer">
+			 ©2023 La Sofia | All Rights Reserved
+		 </div>
+	</footer>
+</html>

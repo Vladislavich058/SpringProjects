@@ -1,0 +1,1029 @@
+*{
+	margin:0;
+	padding: 0;
+}
+
+html{
+	font-family: Montserrat;
+	color: #fff;
+}
+
+/*Home page*/
+
+.container{
+	background-image: url(/images/bg.jpeg);
+	background-size: 100%;
+	height: 700px;
+}
+
+.header{
+	background: rgb(0,0,0,0.8);
+	height: 140px;
+	padding: 40px 100px 40px 100px;
+}
+
+.first-line{
+	padding-bottom: 40px;
+	border-bottom: 2px solid rgb(163, 51, 39, 0.7);
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.mail-container{
+	margin-left: 40px;
+}
+
+.mail-container img{
+	margin-right: 10px;
+}
+
+.phone-container img{
+	margin-right: 10px;
+}
+
+.name-container{
+	margin-left: 160px;
+	font-size: 40px;
+	font-weight: 500;
+    cursor: pointer;
+}
+
+.name-container:hover {
+    letter-spacing: 25px;
+    transform: scale(1.3);
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.name-container a{
+	text-decoration: none;
+	color: rgb(163, 51, 39);
+}
+
+.first-line .user-container{
+	position: absolute;
+	right: 10px;
+	font-family: Montserrat;
+	font-size: 20px;
+	display: flex;
+	cursor: pointer;
+}
+
+.first-line .user-container a{
+	text-decoration: none;
+	color:rgb(163, 51, 39);
+	display: flex;
+	align-items: center;
+}
+
+.first-line .user-container a:hover{
+	text-decoration: underline;
+}
+
+.first-line .user-container a span{
+	margin-left:5px;
+}
+
+.second-line{
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.second-line a{
+	margin-right: 40px;
+	text-decoration: none;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.second-line .orderBtn{
+	margin-left:400px;
+	background-color: rgb(163, 51, 39);
+	padding: 10px 20px;
+	border-radius: 5px;
+}
+
+.second-line a:hover {
+    letter-spacing: 5px;
+    transform: scale(1.3);
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.second-line a:hover:last-child {    
+	letter-spacing: 3px;
+    transform: scale(1);
+    margin-right: 0px;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.second-line img{
+	width: 16px;
+	height: 16px;
+	margin-left: 10px;
+}
+
+.center{
+	margin-left: 350px;
+	margin-top: 100px;
+	font-size: 20px;
+}
+
+.name{
+	font-size: 60px;
+	font-weight: 500;
+	margin-left: 250px;
+}
+
+.description{
+	width: 700px;
+	text-align: center;
+}
+
+.center .button-container{
+	display: flex;
+	margin-left: 180px;
+	margin-top: 20px;
+}
+
+.center .button-container a{
+	color:#fff;
+	text-decoration: none;
+	border: 2px solid #fff;
+	padding: 10px 50px;
+	border-radius: 3px;
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+.center .button-container a:hover {
+    letter-spacing: 10px;
+    transform: scale(1.1);
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.menu-btn a{
+	color: black;
+	text-decoration: none;
+}
+
+footer{
+	text-align: center;
+    background-color: black;
+    opacity: 0.9;
+    height: 150px;
+    color: #fff;
+}
+
+.foottext{
+    padding-top: 40px;
+    font-size: 20px;
+    opacity: 0.5;
+}
+
+/*Login page, Register page*/
+
+.login-container, .register-container{
+	background-color: #1A1A1D;
+	align-items: center;
+	padding-top: 100px;
+	padding-bottom: 100px;
+	padding-left: 450px;
+	min-height: 100vh;
+}
+
+.login-form, .register-form{
+	width: 500px;
+    padding: 40px;
+    padding-bottom: 20px;
+    background:rgb(163, 51, 39, 0.7);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.login-form a, .register-form a{
+	text-decoration: none;
+	color: rgba(0,0,0,.6);
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.login-form a:hover, .register-form a:hover{
+	letter-spacing: 2px;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.alert{
+	color: red;
+	margin:10px 0px 10px 0px;
+}
+
+.login-form input[type="text"], input[type="password"], input[type="email"], input[type="number"],
+.register-form input[type="text"], input[type="password"], input[type="email"], input[type="number"]{
+	text-decoration:none;
+	border-radius:0;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+    margin-top: 10px;
+    font-family: Montserrat;
+}
+ 
+.login-form input[type="password"],
+.register-form input[type="password"]{
+	margin-bottom: 10px;
+}
+
+.login-form input[type="submit"],
+.register-form input[type="submit"]{
+	color:#fff;
+	text-decoration: none;
+	border: 2px solid #fff;
+	padding: 10px 50px;
+	border-radius: 3px;
+	margin-right: 20px;
+	margin-top:10px;
+	cursor: pointer;
+	background: transparent;
+	font-size: 16px;
+	font-family: Montserrat;
+}
+
+.login-form input[type="submit"]:hover,
+.register-form input[type="submit"]:hover  {
+    letter-spacing: 10px;
+    transform: scale(1.2);
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.role-menu a{
+	margin-right: 9px;
+	font-weight: 600;
+	text-decoration: underline;
+	font-size: 18px;
+}
+
+/*Error*/
+
+.error-container{
+	background: linear-gradient(to top,#2e2926, #4e4c4b);
+	height: 100ch;
+	padding: 10px;
+}
+
+.error-container a{
+	font-size: 18px;
+	text-decoration: underline;
+	color: #fff;
+	cursor: pointer;
+}
+
+.error-container a:hover{
+	letter-spacing: 3px;
+}
+
+/*Menu page*/
+
+.menu-container{
+	background: linear-gradient(to top,#2e2926, #4e4c4b);
+	min-height: 700px;
+}
+
+.menu-img{
+	background-image: url(/images/menuBg.png);
+	background-size: 100%;
+	height: 280px;
+	margin-top:40px;
+}
+
+.menu-img-container{
+	padding: 30px 150px 0px 150px;
+}
+
+.menuText{
+	font-size: 40px;
+	font-weight: 600;
+	margin-left: 500px;
+}
+
+.grid{
+	display: grid;
+  	grid-template-columns:650px 650px;
+  	padding: 10px;
+}
+
+.dish-group table td{
+	padding: 10px 50px;
+}
+
+.dish-group table{
+	margin-left:100px;
+}
+
+.group-name{
+	padding: 10px;
+	border-bottom: 2px solid rgb(163, 51, 39);
+	width: 180px;
+	font-size: 26px;
+	font-weight: 600;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	margin-left:150px;
+}
+
+.dish-name{
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.dish-structure, .dish-kcal, .dish-weight, .dish-decriprion{
+	font-size: 16px;
+	color: rgb(29, 29, 29);
+}
+
+.add-container input[type="submit"]{
+	background: transparent;
+	color: rgb(163, 51, 39);
+	font-size:18px;
+	font-family: Montserrat;
+	border: none;
+	cursor: pointer;
+	margin: 10px 0px 0px 20px;
+}
+
+.add-container input[type="submit"]:hover{
+	padding: 5px;
+	transform: scale(1.2);
+}
+
+.add-container input[type="number"]{
+	padding: 5px;
+	border: none;
+	background-color: rgb(0, 0, 0,0.3);
+	border-radius: 5px;
+}
+
+.add-container{
+	padding: 10px;
+	display: flex;
+	width: 120px;
+	align-items: center;
+}
+
+/*Contacts page*/
+
+.contacts-img{
+	background-image: url(/images/contactsBg.png);
+	background-size: 100%;
+	height: 400px;
+	margin-top:40px;
+}
+
+.contacts-img-container{
+	padding: 30px 150px 0px 150px;
+}
+
+.contactsText{
+	font-size: 40px;
+	font-weight: 600;
+	margin-left: 465px;
+}
+
+.contacts-bar{
+	display: flex;
+	padding: 50px;
+	margin-left:300px;
+}
+
+.contacts-container{
+	border-right: 1px solid rgb(163, 51, 39);
+	padding: 50px;
+	text-align: center;
+}
+
+.contacts-container h3{
+	margin-bottom: 10px;
+
+}
+
+.contacts-container:first-child{
+	border-left: 1px solid rgb(163, 51, 39);
+}
+
+.map{
+	padding: 20px 150px 20px 150px;
+	border-radius: 10px;
+}
+
+/*Delivery page*/
+
+.deliveryText{
+	font-size: 40px;
+	font-weight: 600;
+	margin-left: 570px;
+	margin-top:30px;
+}
+
+.delivery-bar{
+	display: flex;
+	padding: 50px;
+	margin-left:350px;
+}
+
+/*Account page*/
+
+.account-container{
+	background: linear-gradient(to top,#2e2926, #4e4c4b);
+	display: flex;
+}
+
+.account-bar{
+	min-width: 300px;
+	background: linear-gradient(to bottom,rgb(0,0,0,0.5), transparent);
+	position: relative;
+	height: 100vh;
+}
+
+.rest-name{
+	font-size: 40px;
+	font-weight: 500;
+	color: rgb(163, 51, 39);
+	padding: 20px 30px;
+}
+
+.account-bar .button-container a{
+	display: block;
+	padding: 10px 40px 10px 30px;
+	cursor: pointer;
+	text-decoration: none;
+	color: #fff;
+	font-size: 20px;
+}
+
+.account-bar .button-container a:hover,
+.account-bar .button-container form input:hover{
+	background-color: rgb(163, 51, 39);
+	transform: scale(1.1);
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	
+}
+
+.account-bar .button-container{
+	margin-top:30px;
+	margin-right: 14px;
+}
+
+.account-bar .button-container form input{
+	bottom: 30px;
+	position: absolute;
+	cursor: pointer;
+	color: #fff;
+	font-size: 20px;
+	background-color: transparent;
+	border: none;
+	font-family: Montserrat;
+	padding: 10px 184px 10px 30px;
+}
+.account-data-container{
+	padding: 150px 300px 0px 300px;
+}
+
+.account-data{
+	padding: 50px 80px 40px 80px;
+	box-shadow: 0 15px 25px rgba(0,0,0,.6);
+	background-color: rgb(163, 51, 39, 0.7);
+	border-radius: 10px;
+	font-size: 20px;
+}
+
+.account-data .data-container{
+	margin-top:10px;
+}
+
+.account-data .data-container:first-child{
+	margin-bottom: 30px;
+	font-size: 28px;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	margin-top: 0;
+}
+
+.account-data .data-container:last-child{
+	margin-top:20px;
+}
+
+.account-data .data-container label{
+	font-weight: 600;
+}
+
+.account-data .data-container span:not(:first-child){
+	color: rgb(163, 165, 165);
+}
+
+.account-data .data-container a{
+	text-decoration: none;
+	color:#fff;
+	cursor: pointer;
+	text-decoration: underline;
+	margin-right: 10px;
+}
+
+.account-data .data-container a:hover{
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    letter-spacing: 4px;
+}
+
+.form-container{
+	padding: 30px 300px;
+}
+
+/*Users list*/
+
+.user-account-container{
+	display: inline-flex;
+	background: linear-gradient(to top,#2e2926, #4e4c4b);
+	min-width: 100vw;
+}
+
+.user-table table{
+	border-collapse: collapse;
+	min-width:1140px;
+}
+
+.user-table table caption{
+	padding: 10px;
+	font-size: 24px;
+	text-align: left;
+	font-weight: bold;
+	background-color: rgb(163, 51, 39, 0.7);
+}
+
+.user-table table th{
+	border-bottom: 3px solid #fff;
+	padding: 10px;
+	text-align: center;
+}
+
+.user-table table td {
+  	padding: 10px;
+  	text-align: center;
+}
+
+.user-table table tr:nth-child(odd) {
+  	background: transparent;
+}
+
+.user-table table tr:nth-child(even) {
+  	background: rgb(163, 51, 39, 0.5);
+}
+
+.user-table table td a:not(:first-child){
+  	margin: 5px 0px 0px 0px;
+}
+
+.user-table table td a:first-child{
+  	color: rgb(0, 0, 0);
+  	border: 1px solid rgb(0, 0, 0);
+}
+
+.user-table table td a{
+	padding: 3px 5px;
+	display: block;
+  	text-decoration: none;
+  	color: rgb(218, 177, 136);
+  	border: 1px solid rgb(218, 177, 136);
+  	border-radius: 5px;
+}
+
+.user-table table td .active{
+  	color: rgb(99, 211, 48);
+  	border: 1px solid rgb(99, 211, 48);
+}
+
+.user-table table td .disactive{
+  	color: red;
+  	border: 1px solid red;
+}
+
+.user-table table td a:hover{
+	transform: scale(1.2);
+	transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.alert2{
+	color:red;
+	padding: 10px;
+	font-size: 22px;
+}
+
+.find-container input[type="text"],
+.find-container input[type="date"]{
+	text-decoration:none;
+	border-radius:0;
+    width: 200px;
+    margin: 10px; 
+    padding: 5px 10px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+    margin-top: 10px;
+    font-family: Montserrat;
+}
+
+.find-container input[type="submit"], 
+.find-container a{
+	padding: 5px 15px;
+  	text-decoration: none;
+  	color:#fff;
+  	border: 1px solid #fff;
+  	border-radius: 5px;
+  	font-size: 18px;
+  	background: transparent;
+  	cursor: pointer;
+  	margin:5px;
+  	font-family: Montserrat;
+}
+
+.find-container a:hover,input[type="submit"]:hover{
+	transform: scale(1.2);
+	transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.find-container {
+	align-items: center;
+	display: flex;
+}
+
+.find-container .add-btn{
+	position: absolute;
+	right: 15px;
+}
+
+/*Manager account*/
+.delete-container{
+	padding: 200px 300px;
+	font-size: 18px;
+}
+
+.delete-container a{
+	color: #fff;
+	text-decoration: underline;
+	margin-right: 10px;
+}
+
+.register-form select{
+	border-radius:5px;
+    width: 100%;
+    padding: 10px 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: transparent;
+    margin-top: 20px;
+    font-family: Montserrat;
+    box-shadow: none;
+    cursor: pointer;
+    appearance: none;
+}
+
+.register-form select:focus-visible, 
+.register-form textarea:focus-visible{
+	outline:none;
+}
+
+.register-form select:not([multiple]) {
+  	padding-right: 1.2em;
+	background-repeat: no-repeat;
+	background-position: calc(100% - 0.25em) 0.8em;
+	background-size: 0.85em auto;
+	background-image: url(/images/down-arrow.png);
+}
+
+.register-form select::-ms-expand {
+  display: none;
+}
+
+.register-form textarea{
+	height: 50px;
+	padding: 10px;
+	width: 380px;
+	background: transparent;
+	margin-top: 20px;
+    font-family: Montserrat;
+    font-size: 16px;
+    color: #fff;
+   	border-radius:5px;
+   	border: 1px solid #fff;
+}
+
+.filter{
+	width: 100px!important;
+}
+
+.find-container select{
+	border-radius:5px;
+    padding: 10px 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: transparent;
+    font-family: Montserrat;
+    box-shadow: none;
+    cursor: pointer;
+    appearance: none;
+    margin:10px;
+}
+
+.find-container select:focus-visible{
+	outline:none;
+}
+
+.find-container select:not([multiple]) {
+  	padding-right: 1.2em;
+	background-repeat: no-repeat;
+	background-position: calc(100% - 0.25em) 0.8em;
+	background-size: 0.85em auto;
+	background-image: url(/images/down-arrow.png);
+}
+
+.find-container select::-ms-expand {
+  display: none;
+}
+
+/*Order*/
+
+.order-container{
+	padding: 10px 150px 50px 150px;
+	min-width: 800px;
+}
+
+.order-name{
+	font-weight: 600;
+	font-size: 26px;
+	margin-bottom: 20px;
+	padding: 10px;
+	border-bottom: 2px solid rgb(163, 51, 39);
+	width: 200px;
+}
+
+.order-name-check, .analytic-name{
+	font-weight: 600;
+	font-size: 26px;
+	margin-bottom: 20px;
+	padding: 10px;
+	border-bottom: 2px solid rgb(163, 51, 39);
+	width: fit-content;
+}
+
+.order-list{
+	list-style-type: none;
+	position: relative;
+}
+
+.order-list li{
+	display: flex;
+	font-size: 20px;
+	align-items: center;
+	padding: 20px;
+}
+
+.order-list li:not(:last-child){
+	border-bottom: 1px solid rgb(163, 165, 165);
+}
+
+.order-list li .dish-name{
+	font-size: 20px;
+}
+
+.order-list li .dish-count{
+	position: absolute;
+	right:300px;
+}
+
+.order-list .dish-delete{
+	position: absolute;
+	right: 10px;
+}
+
+.order-list .dish-price{
+	position: absolute;
+	right: 120px;
+	font-weight: bold;
+}
+
+.order-list .dish-delete a{
+	text-decoration: none;
+	color: #fff;
+	cursor: pointer;
+}
+
+.order-list .dish-delete:hover{
+	transform: scale(1.3);
+	transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cost-container{
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	margin-top: 10px;
+}
+
+.cost-name{
+	color: rgb(252, 255, 255, 0.3);
+	font-size: 18px;
+}
+
+.total-cost{
+	margin-left:10px;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.order-form-container{
+	margin-top:50px;
+}
+
+.order-form-container .order-form input[type="text"],
+.order-form-container .order-form input[type="number"],
+.order-form-container .order-form input[type="date"],
+.order-form-container .order-form input[type="time"]{
+	text-decoration:none;
+	border-radius:0;
+    width: 300px; 
+    padding: 5px 10px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+    margin-top: 20px;
+    font-family: Montserrat;
+}
+
+.order-form-container .order-form .comment{
+	width: 700px!important;
+}
+
+.order-form-container .order-form .btn{
+	position: relative;
+	margin: 20px 0px 40px 0px;
+}
+
+.order-form-container .order-form .btn input[type="submit"]{
+	position: absolute;
+	right: 0;
+	font-family: Montserrat;
+	color: #FFF;
+	border: none;
+	background-color: rgb(163, 51, 39);
+	padding: 10px 40px;
+	font-size: 20px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.cancel{
+	color: red!important;
+  	border: 1px solid red!important;
+}
+
+.view{
+	color: rgb(218, 177, 136)!important;
+  	border: 1px solid rgb(218, 177, 136)!important;
+}
+
+.delete{
+	color: black!important;
+  	border: 1px solid black!important;
+}
+
+.confirm{
+	color: rgb(99, 211, 48)!important;
+  	border: 1px solid rgb(99, 211, 48)!important;
+}
+
+.view-order-list{
+	list-style-type: none;
+	position: relative;
+}
+
+.view-order-list li{
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	font-size: 20px;
+}
+
+.view-order-list .dish-price{
+	position: absolute;
+	right: 0;
+}
+
+.view-order-list .dish-count{
+	position: absolute;
+	right: 200px;
+}
+
+.view-order-list li:not(:last-child){
+	border-bottom: 1px solid rgb(163, 165, 165);
+}
+
+.view-cost-container{
+	display: flex;
+	justify-content: right;
+	align-items: center;
+}
+
+.view-order-container{
+	margin-top:10px;
+}
+
+.view-item-container{
+	display: flex;
+	position: relative;
+	font-size: 22px;
+	padding: 10px;
+}
+
+.view-item-container:not(:last-child){
+	border-bottom: 1px solid rgb(163, 165, 165);
+}
+
+.view-item-container .header-item{
+	font-weight: bold;
+}
+
+.view-item-container .name-item{
+	font-size: 18px;
+	position: absolute;
+	right: 10px;
+}
+
+.top-list{
+	list-style-type:decimal!important;
+}
+
+.top-list li{
+	margin-left:30px;
+	padding: 5px;
+	font-size: 20px;
+}
+
+.flex-container{
+	display: flex;
+}
+
+.top-container:first-child{
+	margin-right: 100px;
+	width: fit-content;
+}
+
+.percent-container{
+	margin-top: 100px;
+	padding: 50px 80px 40px 80px;
+	box-shadow: 0 15px 25px rgba(0,0,0,.6);
+	background-color: rgb(163, 51, 39, 0.7);
+	border-radius: 10px;
+	font-size: 20px;
+	width: fit-content;
+}
+
+.analytic-tiem-container{
+	display: flex;
+	font-size: 20px;
+	margin-top:20px;
+}
+
+.percent-number{
+	margin-left: 10px;
+	font-weight: 700;
+}
+
+.button{
+	font-size: 20px;
+	text-decoration: none;
+	color: white;
+  	border: 1px solid white;
+  	border-radius: 5px;
+  	padding: 5px 10px;
+}
+
+.button:hover{
+	transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    letter-spacing: 4px;
+}
+
+
+

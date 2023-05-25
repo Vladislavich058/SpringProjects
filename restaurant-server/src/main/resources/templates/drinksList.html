@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  	<head>
+		<title>La Sofia</title> 
+		<link rel="stylesheet" th:href="@{/css/style.css}" /> 
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="user-account-container">
+			<div class="account-bar-container" th:replace="~{managerAccount :: account-bar}"></div>
+			<div th:if="!${redactFlag}" class="user-table">
+				<table>
+					<tr>
+						<form method="get" th:action="@{/manager/drinks/find}">
+							<div class="find-container">
+								<input type="text" th:name="name" placeholder="Drink name" required="true" />
+								<input type="submit" value="Find">
+								<a th:href="@{/manager/drinks}">Reset</a>
+								<a class="add-btn" th:href="@{/manager/drink/add}">Add new drink</a>
+							</div>
+						</form>
+					</tr>
+					<tr>
+						<form method="get" th:action="@{/manager/drinks/filter}">
+							<div class="find-container">
+								<input class="filter" type="text" th:name="priceFrom" placeholder="From price" required="true" pattern="^\d+[.]?\d{0,2}$"/>
+								<input class="filter" type="text" th:name="priceTo" placeholder="To price" required="true" pattern="^\d+[.]?\d{0,2}$"/>
+								<input type="submit" value="Filter">
+							</div>
+							<div class="alert" 
+								th:if="${errorMessage}"
+								th:text="${errorMessage}">
+					        		errorText</div>
+						</form>
+						<form method="get" th:action="@{/manager/drinks/sort}">
+							<div class="find-container">
+								<select> 
+									<option>Sort by price</option>  
+					 			</select> 
+								<input type="submit" value="Sort">
+							</div>
+						</form>
+					</tr>
+					<tr>
+						<caption colspan="3">Drinks</caption>
+					</tr>
+					<tr>
+						<th>Name</th>
+						<th>Price</th>
+						<th></th>
+					</tr>
+					<th:block th:if="!${drinks.isEmpty()}" th:each="drink : ${drinks}">
+					    <tr>
+					        <td>
+								<div th:text="${drink.name}">name</div>
+					        </td>
+							<td>
+								<div th:text="${drink.price}">price</div>
+							</td>
+							<td>
+								<a th:href="@{/manager/drink/delete(id=${drink.id})}">Delete</a>
+								<a th:href="@{/manager/drink/redact(id=${drink.id})}">Redact</a>
+							</td>
+					    </tr>
+					</th:block>
+				</table>
+				<div class="alert2" th:if="${drinks.isEmpty()}">No data</div>
+			</div>
+			<div th:if="${redactFlag}" class="form-container">
+				<form class="register-form" method="POST" th:action="${addFlag} ? @{/manager/drink/add} : @{/manager/drink/redact}" th:object="${drink}"> 
+					<h1>Drink information</h1><br/>
+					<input th:if="!${addFlag}" type="hidden" name="id" th:field="*{id}"/>
+					<input type="text" name="name" placeholder="Name" id="name" th:field="*{name}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('name')}" 
+						th:errors="*{name}">name Error</div> 
+						
+					<input type="text" name="price" placeholder="Price (BYN)" id="price" th:field="*{price}" required="true" pattern="^\d+[.]?\d{0,2}$"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('price')}" 
+						th:errors="*{price}">price Error</div> 
+						
+					
+					<div class="alert" 
+						th:if="${errorMessage}"
+						th:text="${errorMessage}">
+			        		errorText</div>
+			        			
+					<input type="submit" value="Submit"/> 
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

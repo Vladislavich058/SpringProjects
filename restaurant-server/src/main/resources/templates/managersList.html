@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  	<head>
+		<title>La Sofia</title> 
+		<link rel="stylesheet" th:href="@{/css/style.css}" /> 
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="user-account-container">
+			<div th:replace="~{adminAccount :: account-bar}"></div>
+			<div th:if="!${redactFlag}" class="user-table">
+				<table>
+					<tr>
+						<form  method="get" th:action="@{/admin/managers/find}">
+							<div class="find-container">
+								<input type="text" th:name="username" placeholder="Username" required="true" />
+								<input type="submit" value="Find">
+								<a th:href="@{/admin/managers}">Reset</a>
+							</div>
+						</form>
+					</tr>
+					<tr>
+						<caption colspan="12">Managers</caption>
+					</tr>
+					<tr>
+						<th>Username</th>
+						<th>Name</th>
+						<th>Surname</th>
+						<th>Lastname</th>
+						<th>Phone</th>
+						<th>Passport Number</th>
+						<th>Work experience</th>
+						<th>Work phone</th>
+						<th>Status</th>
+						<th></th>
+					</tr>
+					<th:block th:if="!${managers.isEmpty()}" th:each="manager : ${managers}">
+					    <tr>
+					        <td>
+								<div th:text="${manager.staffInfo.user.username}">username</div>
+					        </td>
+					        <td>
+								<div th:text="${manager.staffInfo.user.name}">name</div>
+							</td>
+							<td>
+								<div th:text="${manager.staffInfo.user.surname}">surname</div>
+							</td>
+							<td>
+								<div th:text="${manager.staffInfo.user.lastname}">lastname</div>
+							</td>
+							<td>
+								<div th:text="${manager.staffInfo.user.phone}">phone</div>
+							</td>
+							<td>
+								<div th:text="${manager.staffInfo.passportNumber}">passportNumber</div>
+							</td>
+							<td>
+								<div th:text="${manager.staffInfo.workExperience}">workExperience</div>
+							</td>
+							<td>
+								<div th:text="${manager.workPhone}">workPhone</div>
+							</td>
+							<td>
+								<div th:text="${manager.staffInfo.user.status}==true ? 'ACTIVE' : 'NOT ACTIVE'">status</div>
+							</td>
+							<td>
+								<a th:href="@{/admin/manager/delete(id=${manager.id})}">Delete</a>
+								<a th:href="@{/admin/manager/redact(id=${manager.id})}">Redact</a>
+								<a th:class="${manager.staffInfo.user.status}==true ? disactive : active" 
+									th:href="@{/admin/manager/status(id=${manager.staffInfo.user.id})}" 
+										th:text="${manager.staffInfo.user.status}==true ? 'Disactivate' : 'Activate'"></a>
+							</td>
+					    </tr>
+					</th:block>
+				</table>
+				<div class="alert2" th:if="${managers.isEmpty()}">No data</div>
+			</div>
+			<div th:if="${redactFlag}" class="form-container">
+				<form class="register-form" method="POST" th:action="@{/admin/manager/redact}" th:object="${managerRegistrationForm}"> 
+					<h1>Redact manager</h1><br/>
+					<input type="hidden" name="id" th:field="*{id}"/>
+					<input type="text" name="name" placeholder="Name" id="name" th:field="*{name}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('name')}" 
+						th:errors="*{name}">name Error</div> 
+					
+					<input type="text" name="surname" placeholder="Surname" id="surname" th:field="*{surname}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('surname')}" 
+						th:errors="*{surname}">surname Error</div> 
+					
+					<input type="text" name="lastname" placeholder="Lastname" id="lastname" th:field="*{lastname}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('lastname')}" 
+						th:errors="*{lastname}">lastname Error</div> 	
+									
+					<input type="text" name="phone" placeholder="Phone" id="phone" th:field="*{phone}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('phone')}" 
+						th:errors="*{phone}">phone Error</div> 
+						
+					<input type="text" name="workPhone" placeholder="Work phone" id="workPhone" th:field="*{workPhone}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('workPhone')}" 
+						th:errors="*{workPhone}">workPhone Error</div> 
+						
+					<input type="number" name="workExperience" placeholder="Work experience" id="workExperience" th:field="*{workExperience}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('workExperience')}" 
+						th:errors="*{workExperience}">workExperience Error</div> 
+						
+					<input type="text" name="passportNumber" placeholder="Passport number" id="passportNumber" th:field="*{passportNumber}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('passportNumber')}" 
+						th:errors="*{passportNumber}">passportNumber Error</div> 
+						
+					<input type="text" name="username" placeholder="Username" id="username" th:field="*{username}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('username')}" 
+						th:errors="*{username}">username Error</div> 
+						
+					<input type="password" name="password" placeholder="Password" id="password" th:field="*{password}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('password')}" 
+						th:errors="*{password}">password Error</div> 
+					
+					<div class="alert" 
+						th:if="${errorMessage}"
+						th:text="${errorMessage}">
+			        		errorText</div>
+			        			
+					<input type="submit" value="Submit"/> 
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"> 
+	<head>
+		<title>La Sofia</title> 
+		<link rel="stylesheet" th:href="@{/css/style.css}" /> 
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<body> 
+		<div class="register-container">
+			<form class="register-form" method="POST" th:action="@{/register/client}" th:object="${clientRegistrationForm}"> 
+				<h1>Register client</h1><br/>
+				<p>Choose another role:</p>
+				<div class="role-menu">
+					<a th:href="@{/register/client}">Client</a>
+					<a th:href="@{/register/manager}">Manager</a>
+					<a th:href="@{/register/messenger}">Messenger</a> 
+				</div>
+				<input type="text" name="name" placeholder="Name" id="name" th:field="*{name}" required="true"/><br/>
+				<div class="alert"
+					th:if="${#fields.hasErrors('name')}" 
+					th:errors="*{name}">name Error</div> 
+				
+				<input type="text" name="surname" placeholder="Surname" id="surname" th:field="*{surname}" required="true"/><br/>
+				<div class="alert"
+					th:if="${#fields.hasErrors('surname')}" 
+					th:errors="*{surname}">surname Error</div> 
+				
+				<input type="text" name="lastname" placeholder="Lastname" id="lastname" th:field="*{lastname}" required="true"/><br/>
+				<div class="alert"
+					th:if="${#fields.hasErrors('lastname')}" 
+					th:errors="*{lastname}">lastname Error</div> 	
+								
+				<input type="text" name="phone" placeholder="Phone" id="phone" th:field="*{phone}" required="true"/><br/>
+				<div class="alert"
+					th:if="${#fields.hasErrors('phone')}" 
+					th:errors="*{phone}">phone Error</div> 
+					
+				<input type="email" name="mail" placeholder="E-mail" id="mail" th:field="*{mail}" required="true"/><br/>
+				<div class="alert"
+					th:if="${#fields.hasErrors('mail')}" 
+					th:errors="*{mail}">mail Error</div> 
+					
+				<input type="text" name="username" placeholder="Username" id="username" th:field="*{username}" required="true"/><br/>
+				<div class="alert"
+					th:if="${#fields.hasErrors('username')}" 
+					th:errors="*{username}">username Error</div> 
+					
+				<input type="password" name="password" placeholder="Password" id="password" th:field="*{password}" required="true"/><br/>
+				<div class="alert"
+					th:if="${#fields.hasErrors('password')}" 
+					th:errors="*{password}">password Error</div> 
+					
+				<div class="alert" 
+					th:if="${errorMessage}"
+					th:text="${errorMessage}">
+		        		errorText</div>
+		    		
+				<p>Do you already have an account? Click <a th:href="@{/login}">here</a> to login.</p>
+				<input type="submit" value="Register"/> 
+			</form>
+		</div>
+	</body> 
+</html>

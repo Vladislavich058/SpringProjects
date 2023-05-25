@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"> 
+	<head>
+		<title>Shop</title> 
+		<link rel="stylesheet" th:href="@{/css/main.css}" />
+        <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,300,600,700,800' rel='stylesheet' type='text/css'>
+	</head>
+	<body class="bg-blue-800 font-['Raleway'] items-start font-light text-white">
+        <div th:replace="~{admin :: menuAdmin}"></div>
+        <div class="pl-[350px]">
+            <div class="container p-10 mx-auto">
+                <div class="flex justify-end">
+                    <form  method="get" th:action="@{/admin/findClients}">
+                        <div class="flex items-center">
+                            <button type="submit">
+                                <img th:src="@{/images/searching.png}" class="w-[30px] mr-5"/>
+                            </button>
+                            <input type="text" name="find" id="find" class="block mr-3 py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2" placeholder="FIND" required />
+                            <a th:href="@{/admin/clients}">
+                                <img th:src="@{/images/reset-3.png}" class="w-[30px]"/>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="text-3xl uppercase tracking-wider">Clients</div>
+                <table class="mt-3 w-full table-auto border-collapse text-center">
+                    <thead class="border font-medium border-white">
+                        <tr>
+                            <th class="p-5">Username</th>
+                            <th class="p-5">Name</th>
+                            <th class="p-5">Surname</th>
+                            <th class="p-5">Lastname</th>
+                            <th class="p-5">Phone</th>
+                            <th class="p-5">Email</th>
+                            <th class="p-5">Status</th>
+                            <th class="p-5"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <th:block th:if="!${clients.isEmpty()}" th:each="client : ${clients}">
+                            <tr class="border border-white">
+                                <td class="p-5" th:text="${client.username}"></td>
+                                <td class="p-5" th:text="${client.name}"></td>
+                                <td class="p-5" th:text="${client.surname}"></td>
+                                <td class="p-5" th:text="${client.lastname}"></td>
+                                <td class="p-5" th:text="${client.phone}"></td>
+                                <td class="p-5" th:text="${client.email}"></td>
+                                <td class="p-5">
+                                    <a th:href="@{/admin/changeStatus(clientId=${client.id})}">
+                                        <img class="w-[30px] m-auto block" th:src="${client.status} ? @{/images/active.png} : @{/images/blocked.png}" alt="status">
+                                    </a>
+                                </td>
+                                <td class="p-5">
+                                    <a th:href="@{/admin/deleteClient(clientId=${client.id})}">
+                                        <img th:src="@{/images/x-mark.png}" class="block w-[30px]" alt="delete" title="Delete client"/>
+                                    </a>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+	</body> 
+</html>

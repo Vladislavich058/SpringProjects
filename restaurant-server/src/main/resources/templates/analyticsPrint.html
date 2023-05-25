@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700" rel="stylesheet" />
+	<style>
+		.top-list {
+			list-style-type: decimal !important;
+		}
+
+		.top-list li {
+			margin-left: 30px;
+			padding: 5px;
+			font-size: 20px;
+		}
+
+		.flex-container {
+			display: flex;
+		}
+
+		.top-container{
+			margin-top: 20px;
+			padding: 50px 80px 40px 80px;
+			box-shadow: 0 15px 25px rgba(0, 0, 0);
+			background-color: rgb(163, 51, 39);
+			border-radius: 10px;
+			font-size: 20px;
+			width: fit-content;
+			color: white;
+		}
+
+		.percent-container {
+			margin-top: 20px;
+			padding: 50px 80px 40px 80px;
+			box-shadow: 0 15px 25px rgba(0, 0, 0);
+			background-color: rgb(163, 51, 39);
+			border-radius: 10px;
+			font-size: 20px;
+			width: fit-content;
+		}
+
+		.analytic-tiem-container {
+			display: flex;
+			font-size: 20px;
+			margin-top: 20px;
+			color: white;
+		}
+		
+		.analytic-name{
+			font-size: 20px;
+		}
+
+		.percent-number {
+			margin-left: 10px;
+			font-weight: 700;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="flex-container">
+		<div class="top-container">
+			<div class="analytic-name">Top dishes</div>
+			<ol class="top-list">
+				<li th:each="dish : ${dishes}">
+					<div class="dish-name" th:text="${dish}"></div>
+				</li>
+			</ol>
+		</div>
+		<div class="top-container">
+			<div class="analytic-name">Top drinks</div>
+			<ol class="top-list">
+				<li th:each="drink : ${drinks}">
+					<div class="dish-name" th:text="${drink}"></div>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div class="percent-container">
+		<div class="analytic-tiem-container">
+			<div class="percent-name">Percentage of cancelled orders: </div>
+			<div class="percent-number" th:text="${thymeMath.ceil(canceledPercent)}+'%'"></div>
+		</div>
+		<div class="analytic-tiem-container">
+			<div class="percent-name">Percentage of expired orders: </div>
+			<div class="percent-number" th:text="${thymeMath.ceil(expiredPercent)}+'%'"></div>
+		</div>
+		<div class="analytic-tiem-container">
+			<div class="percent-name">Percentage of in time completed orders: </div>
+			<div class="percent-number" th:text="${thymeMath.ceil(inTimePercent)}+'%'"></div>
+		</div>
+		<div class="analytic-tiem-container">
+			<div class="percent-name">Avarage paycheck: </div>
+			<div class="percent-number" th:text="${thymeMath.ceil(payCheck)}+' BYN'"></div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  	<head>
+		<title>La Sofia</title> 
+		<link rel="stylesheet" th:href="@{/css/style.css}" /> 
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="menu-container">
+			<div th:replace="~{home :: header}"></div>
+			<div class="deliveryText">Delivery zone</div>
+			<div class="map">
+				<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab1c74f034a122c367eb649b77148c67c37542a70b1cf60ca3d30953729376476&amp;source=constructor"
+				width="100%" height="420" frameborder="0" allowfullscreen="true"></iframe>
+			</div>
+			<div class="delivery-bar">
+				<div class="contacts-container">
+					<h3>Red zone</h3>
+					<p>FREE</p>
+				</div>
+				<div class="contacts-container">
+					<h3>Green zone</h3>
+					<p>5,50 BYN</p>
+				</div>
+				<div class="contacts-container">
+					<h3>Yellow zone</h3>
+					<p>9,90 BYN</p>
+				</div>
+			</div>
+		</div>
+	</body>
+	<footer>
+		<div th:replace="~{home :: footer}"></div>
+	</footer>
+</html>

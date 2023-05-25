@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  	<head>
+		<title>La Sofia</title> 
+		<link rel="stylesheet" th:href="@{/css/style.css}" /> 
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="account-container">
+			<div class="account-bar" th:fragment="account-bar">
+				<div class="rest-name">
+					La Sofia
+				</div>
+				<div class="button-container">
+					<a th:href="@{/client/account}">Personal data</a>
+					<a th:href="@{/order}">Make an order</a>
+					<a th:href="@{/client/orders}">Orders</a>
+					<a th:href="@{/}">Main</a>
+					<form method="POST" th:action="@{/logout}">
+			 			<input type="submit" value="Logout"/>
+					</form>
+				</div>
+			</div>
+			<div th:if="!${deleteFlag} and !${redactFlag}" class="account-data-container">
+				<div class="account-data">
+					<div class="data-container">
+						<span>Client</span>
+					</div>
+					<div class="data-container">
+						<label>Username: </label>
+						<span th:text="${client.user.username}"></span>
+					</div>
+					<div class="data-container">
+						<label>Name: </label>
+						<span th:text="${client.user.name}"></span>
+					</div>
+					<div class="data-container">
+						<label>Surname: </label>
+						<span th:text="${client.user.surname}"></span>
+					</div>
+					<div class="data-container">
+						<label>Lastname: </label>
+						<span th:text="${client.user.lastname}"></span>
+					</div>
+					<div class="data-container">
+						<label>Phone: </label>
+						<span th:text="${client.user.phone}"></span>
+					</div>
+					<div class="data-container">
+						<label>Email: </label>
+						<span th:text="${client.email}"></span>
+					</div>
+					<div class="data-container">
+						<a th:href="@{/client/redact}">Redact</a>
+						<a th:href="@{/client/delete}">Delete</a>
+					</div>
+				</div>
+			</div>
+			<div th:if="${deleteFlag}" class="delete-container">
+				<div class="register-form">
+					<span>Are you sure? Your account will be permanently deleted. </span><br/>
+					<a th:href="@{/client/deleteTrue}">Delete</a>
+					<a th:href="@{/client/account}">Return</a>
+				</div>
+			</div>
+			<div th:if="${redactFlag}" class="form-container">
+				<form class="register-form" method="POST" th:action="@{/client/account}" th:object="${clientRegistrationForm}"> 
+					<h1>Redact client</h1><br/>
+					<input type="hidden" name="id" th:field="*{id}"/>
+					<input type="text" name="name" placeholder="Name" id="name" th:field="*{name}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('name')}" 
+						th:errors="*{name}">name Error</div> 
+					
+					<input type="text" name="surname" placeholder="Surname" id="surname" th:field="*{surname}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('surname')}" 
+						th:errors="*{surname}">surname Error</div> 
+					
+					<input type="text" name="lastname" placeholder="Lastname" id="lastname" th:field="*{lastname}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('lastname')}" 
+						th:errors="*{lastname}">lastname Error</div> 	
+									
+					<input type="text" name="phone" placeholder="Phone" id="phone" th:field="*{phone}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('phone')}" 
+						th:errors="*{phone}">phone Error</div> 
+						
+					<input type="text" name="mail" placeholder="Email" id="mail" th:field="*{mail}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('mail')}" 
+						th:errors="*{mail}">workPhone Error</div> 
+						
+					<input type="text" name="username" placeholder="Username" id="username" th:field="*{username}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('username')}" 
+						th:errors="*{username}">username Error</div> 
+						
+					<input type="password" name="password" placeholder="Password" id="password" th:field="*{password}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('password')}" 
+						th:errors="*{password}">password Error</div> 
+					
+					<div class="alert" 
+						th:if="${errorMessage}"
+						th:text="${errorMessage}">
+			        		errorText</div>
+			        			
+					<input type="submit" value="Submit"/> 
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

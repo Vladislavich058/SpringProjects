@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  	<head>
+		<title>La Sofia</title> 
+		<link rel="stylesheet" th:href="@{/css/style.css}" /> 
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="user-account-container">
+			<div class="account-bar-container" th:replace="${managerFlag} ? ~{managerAccount :: account-bar} 
+			: ~{messengerAccount :: account-bar}"></div>
+			<div th:if="!${viewFlag}" class="user-table">
+				<table>
+					<tr>
+						<form method="get" th:action="${managerFlag} ? @{/manager/deliveries/find} 
+						:@{/messenger/deliveries/find}">
+							<div class="find-container">
+								<input type="text" th:name="id" placeholder="Delivery number" required="true" />
+								<input type="submit" value="Find">
+								<a th:href="${managerFlag} ? @{/manager/deliveries} 
+								: @{/messenger/deliveries}">Reset</a>
+							</div>
+						</form>
+					</tr>
+					<tr>
+						<form method="get" th:action="${managerFlag} ? @{/manager/deliveries/filter} 
+						: @{/messenger/deliveries/filter}">
+							<div class="find-container">
+								<input class="filter" type="date" th:name="dateFrom" placeholder="From date" required="true"/>
+								<input class="filter" type="date" th:name="dateTo" placeholder="To date" required="true"/>
+								<input type="submit" value="Filter">
+							</div>
+							<div style="margin: 10px;" class="alert" 
+								th:if="${errorMessage}"
+								th:text="${errorMessage}">
+					        		errorText</div>
+						</form>
+						<form method="get" th:action="${managerFlag} ? @{/manager/deliveries/sort} 
+						: @{/messenger/deliveries/sort}">
+							<div class="find-container">
+								<select th:name="choice"> 
+									<option th:value="1">Sort by price</option> 
+									<option th:value="2">Sort by delivery date</option> 
+									<option th:if="${managerFlag}" th:value="3">Only completed</option> 
+									<option th:if="${managerFlag}" th:value="4">Only on the way</option> 
+					 			</select> 
+								<input type="submit" value="Sort">
+							</div>
+						</form>
+					</tr>
+					<tr>
+						<caption colspan="10">Deliveries</caption>
+					</tr>
+					<tr>
+						<th>Order №</th>
+						<th>Date created</th>
+						<th>Street</th>
+						<th>House</th>
+						<th>Apartment</th>
+						<th>Delivery date</th>
+						<th>Delivery time</th>
+						<th>Status</th>
+						<th>Cost (BYN)</th>
+						<th></th>
+					</tr>
+					<th:block th:if="${orders}" th:each="order : ${orders}">
+					    <tr>
+					        <td>
+								<div th:text="${order.id}">id</div>
+					        </td>
+					        <td>
+								<div th:text="${@dateFormatter.format(order.createdAt)}">createdAt</div>
+							</td>
+							<td>
+								<div th:text="${order.deliveryStreet}">street</div>
+							</td>
+							<td>
+								<div th:text="${order.deliveryHouse}">house</div>
+							</td>
+							<td>
+								<div th:text="${order.deliveryApartment}">apartment</div>
+							</td>
+							<td>
+								<div th:text="${order.deliveryDate}">date</div>
+							</td>
+							<td>
+								<div th:text="${order.deliveryTime}">time</div>
+							</td>
+							<td>
+								<div th:text="${order.status}">status</div>
+							</td>
+							<td>
+								<div th:text="${order.deliveryCost}">cost</div>
+							</td>
+							<td>
+								<a class="view" th:href="${managerFlag} ? @{/manager/delivery/view(id=${order.id})} 
+								: @{/messenger/delivery/view(id=${order.id})}">View</a>
+								<a class="cancel" th:if="(${messengerFlag} and ${order.status.equals('on the way')}) or (${managerFlag} 
+								and !${order.status.equals('completed')} and !${order.status.equals('canceled')})"
+									th:href="${managerFlag} ? @{/manager/delivery/cancel(id=${order.id})} : @{/messenger/delivery/cancel(id=${order.id})}">Cancel</a>
+								<a class="confirm" th:if="${messengerFlag} and !${order.status.equals('completed')}"
+									th:href="@{/messenger/delivery/confirm(id=${order.id})}">Confirm</a>
+							</td>
+					    </tr>
+					</th:block>
+				</table>
+				<div class="alert2" th:if="${orders.isEmpty()}">No data</div>
+			</div>
+			<div th:if="${order}" class="order-container">
+				<div th:text="'Delivery № '+${order.id}" class="order-name-check"></div>
+				<ul class="view-order-list">
+					<li th:each="counter : ${order.orderDishCounteres}">
+						<div class="dish-name" th:text="${counter.dish.name}"></div>
+						<div class="dish-count" th:text="'x'+${counter.count}"></div>
+						<div class="dish-price" th:text="${@thymeMath.ceil(counter.count*counter.dish.price)}+' BYN'"></div>
+					</li>
+					<li th:each="counter : ${order.orderDrinkCounteres}">
+						<div class="dish-name" th:text="${counter.drink.name}"></div>
+						<div class="dish-count" th:text="'x'+${counter.count}"></div>
+						<div class="dish-price" th:text="${@thymeMath.ceil(counter.count*counter.drink.price)}+' BYN'"></div>
+					</li>
+				</ul>
+				<div class="view-cost-container">	
+					<div class="cost-name">Total cost: </div>
+					<div class="total-cost" th:text="${order.deliveryCost}+' BYN'"></div>
+				</div>
+				<div th:if="${managerFlag}" class="view-order-container">
+					<div class="order-name-check">Delivers information</div>
+					<div class="order-form">
+						<div class="view-item-container">
+							<div class="header-item">Name</div>
+							<div class="name-item" th:text="${order.messenger.staffInfo.user.name}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Surname</div>
+							<div class="name-item" th:text="${order.messenger.staffInfo.user.surname}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Lastname</div>
+							<div class="name-item" th:text="${order.messenger.staffInfo.user.lastname}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Phone</div>
+							<div class="name-item" th:text="${order.messenger.staffInfo.user.phone}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Car number</div>
+							<div class="name-item" th:text="${order.messenger.carNumber}"></div>
+						</div>
+					</div>
+				</div>
+				<div class="view-order-container">
+					<div class="order-name-check">Delivery details</div>
+					<div class="order-form">
+						<div class="view-item-container">
+							<div class="header-item">Client name</div>
+							<div class="name-item" th:text="${order.deliveryClient.user.name}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Client surname</div>
+							<div class="name-item" th:text="${order.deliveryClient.user.surname}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Client lastname</div>
+							<div class="name-item" th:text="${order.deliveryClient.user.lastname}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Client phone</div>
+							<div class="name-item" th:text="${order.deliveryClient.user.phone}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Street</div>
+							<div class="name-item" th:text="${order.deliveryStreet}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">House</div>
+							<div class="name-item" th:text="${order.deliveryHouse}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Apartment</div>
+							<div class="name-item" th:text="${order.deliveryApartment}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Date</div>
+							<div class="name-item" th:text="${order.deliveryDate}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Time</div>
+							<div class="name-item" th:text="${order.deliveryTime}"></div>
+						</div>
+						<div th:if="${order.status.equals('completed')}" class="view-item-container">
+							<div class="header-item">Delivered date and time</div>
+							<div class="name-item" th:text="${@dateFormatter.format(order.deliveredAt)}"></div>
+						</div>
+						<div class="view-item-container">
+							<div class="header-item">Comment</div>
+							<div class="name-item" th:text="${order.deliveryComment}"></div>
+						</div>
+						<div th:if="${completed}" class="view-item-container">
+							<div class="header-item">Result status</div>
+							<div class="name-item" th:text="${completed}"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

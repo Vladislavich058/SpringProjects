@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  	<head>
+		<title>La Sofia</title> 
+		<link rel="stylesheet" th:href="@{/css/style.css}" /> 
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="user-account-container">
+			<div th:replace="~{adminAccount :: account-bar}"></div>
+			<div th:if="!${redactFlag}" class="user-table">
+				<table>
+					<tr>
+						<form  method="get" th:action="@{/admin/clients/find}">
+							<div class="find-container">
+								<input type="text" th:name="username" placeholder="Username" required="true" />
+								<input type="submit" value="Find">
+								<a th:href="@{/admin/clients}">Reset</a>
+							</div>
+						</form>
+					</tr>
+					<tr>
+						<caption colspan="12">Clients</caption>
+					</tr>
+					<tr>
+						<th>Username</th>
+						<th>Name</th>
+						<th>Surname</th>
+						<th>Lastname</th>
+						<th>Phone</th>
+						<th>Email</th>
+						<th>Status</th>
+						<th></th>
+					</tr>
+					<th:block th:if="!${clients.isEmpty()}" th:each="client : ${clients}">
+					    <tr>
+					        <td>
+								<div th:text="${client.user.username}">username</div>
+					        </td>
+					        <td>
+								<div th:text="${client.user.name}">name</div>
+							</td>
+							<td>
+								<div th:text="${client.user.surname}">surname</div>
+							</td>
+							<td>
+								<div th:text="${client.user.lastname}">lastname</div>
+							</td>
+							<td>
+								<div th:text="${client.user.phone}">phone</div>
+							</td>
+							<td>
+								<div th:text="${client.email}">Email</div>
+							</td>
+							<td>
+								<div th:text="${client.user.status}==true ? 'ACTIVE' : 'NOT ACTIVE'">status</div>
+							</td>
+							<td>
+								<a th:href="@{/admin/client/delete(id=${client.id})}">Delete</a>
+								<a th:href="@{/admin/client/redact(id=${client.id})}">Redact</a>
+								<a th:class="${client.user.status}==true ? disactive : active" 
+									th:href="@{/admin/client/status(id=${client.user.id})}" 
+										th:text="${client.user.status}==true ? 'Disactivate' : 'Activate'"></a>
+							</td>
+					    </tr>
+					</th:block>
+				</table>
+				<div class="alert2" th:if="${clients.isEmpty()}">No data</div>
+			</div>
+			<div th:if="${redactFlag}" class="form-container">
+				<form class="register-form" method="POST" th:action="@{/admin/client/redact}" th:object="${clientRegistrationForm}"> 
+					<h1>Client manager</h1><br/>
+					<input type="hidden" name="id" th:field="*{id}"/>
+					<input type="text" name="name" placeholder="Name" id="name" th:field="*{name}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('name')}" 
+						th:errors="*{name}">name Error</div> 
+					
+					<input type="text" name="surname" placeholder="Surname" id="surname" th:field="*{surname}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('surname')}" 
+						th:errors="*{surname}">surname Error</div> 
+					
+					<input type="text" name="lastname" placeholder="Lastname" id="lastname" th:field="*{lastname}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('lastname')}" 
+						th:errors="*{lastname}">lastname Error</div> 	
+									
+					<input type="text" name="phone" placeholder="Phone" id="phone" th:field="*{phone}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('phone')}" 
+						th:errors="*{phone}">phone Error</div> 
+						
+					<input type="text" name="mail" placeholder="Email" id="mail" th:field="*{mail}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('mail')}" 
+						th:errors="*{mail}">mail Error</div> 
+						
+					<input type="text" name="username" placeholder="Username" id="username" th:field="*{username}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('username')}" 
+						th:errors="*{username}">username Error</div> 
+						
+					<input type="password" name="password" placeholder="Password" id="password" th:field="*{password}" required="true"/><br/>
+					<div class="alert"
+						th:if="${#fields.hasErrors('password')}" 
+						th:errors="*{password}">password Error</div> 
+					
+					<div class="alert" 
+						th:if="${errorMessage}"
+						th:text="${errorMessage}">
+			        		errorText</div>
+			        			
+					<input type="submit" value="Submit"/> 
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

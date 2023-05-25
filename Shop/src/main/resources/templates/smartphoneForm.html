@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"> 
+	<head>
+		<title>Shop</title> 
+		<link rel="stylesheet" th:href="@{/css/main.css}" />
+        <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,300,600,700,800' rel='stylesheet' type='text/css'>
+	</head>
+	<body class="bg-blue-800 font-['Raleway'] items-start font-light text-white">
+        <div th:replace="~{admin :: menuAdmin}"></div>
+        <div class="pl-[350px]">
+            <div class="container p-10 mx-auto">
+                <div class="w-full max-w-lg m-auto justify-center">
+                    <form class="bg-opacity-50 px-10" method="POST" th:action="${edit} ? @{/admin/editSmartphone} : @{/admin/addSmartphone}" th:object="${smartphone}"> 
+                        <div class="text-center text-3xl uppercase tracking-widest">Smartphone information</div>
+                        <input type="hidden" th:field="*{id}" name="id" id="id">
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{name}" name="name" id="name" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " required />
+                            <label for="name" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Name</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{company}" name="company" id="company" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="[A-Za-zА-Яа-яёЁ]+" required />
+                            <label for="company" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Company</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{cameraResolution}" name="cameraResolution" id="cameraResolution" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="\d+" required />
+                            <label for="cameraResolution" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Camera resolution (Mp)</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{frontCameraResolution}" name="frontCameraResolution" id="frontCameraResolution" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="\d+" required />
+                            <label for="frontCameraResolution" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Front camera resolution (Mp)</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{ram}" name="ram" id="ram" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="\d+" required />
+                            <label for="ram" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">ram (GB)</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{internalMemory}" name="internalMemory" id="internalMemory" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="\d+" required />
+                            <label for="internalMemory" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Internal memory (GB)</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{batteryCapacity}" name="batteryCapacity" id="batteryCapacity" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="\d+" required />
+                            <label for="batteryCapacity" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Battery capacity (mAh)</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{photo}" name="photo" id="photo" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" "  required />
+                            <label for="photo" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Photo url</label>
+                        </div>
+                        <div class="relative z-0 w-full mt-10 group">
+                            <input type="text" th:field="*{price}" name="price" id="price" class="block py-1 p-0 w-full bg-transparent border-0 border-b border-white appearance-none focus:outline-none focus:border-b-2 peer" placeholder=" " pattern="\d+([.]{1}\d{1,2})?" required />
+                            <label for="price" class="absolute tracking-wider uppercase duration-300 transform -translate-y-5 scale-[.8] top-0 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.8] peer-focus:-translate-y-5">Price Br</label>
+                        </div>
+                        <div th:if="${errMes}" class="text-red-500 font-medium mt-1" th:text="${errMes}"></div>
+                        <div class="mt-5">
+                            <button type="submit" id="btn" class="w-full bg-white text-xl text-blue-700 border border-white uppercase hover:bg-transparent hover:text-white p-3 focus:outline-none focus:shadow-outline">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+	</body> 
+</html>
